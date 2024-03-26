@@ -21,6 +21,8 @@ import java.util.Scanner;
 //(t는 테스트 케이스의 번호를 의미하며 1부터 시작한다.)
 public class swExpert4 {
     public static void main(String[] args) {
+
+        // 데이터 입력과 제약조건
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
         int M = sc.nextInt();
@@ -32,12 +34,28 @@ public class swExpert4 {
                 }
             }
 
-            int[] result = new int[(N-M-1)*(N-M-1)];
-            for(int i = 0; i < N-M+1; i++){
-                for(int j = 0; j < N-M+1; j++){
-                    result[i] += arr[i][j] + arr[i+1][j] + arr[i][j+1] +arr[i+1][j+1];
+            // 저장된 arr배열을 입력받은 M만큼 행열을 더해 result배열로 저장
+            int[][] result = new int[N-M+1][N-M+1];         // result배열의 크기 초기화
+            for(int i = 0; i < N-M+1; i++){                 // 탐색 전체 행에 대한 기준
+                for(int j = 0; j < N-M+1; j++){             // 탐색 전체 열에 대한 기준
+                    for(int k = i; k < i+M; k++){           // M만큼 result에 저장하기 위한 행 기준
+                        for(int m = j; m < j+M; m++){       // result에 저장하기 위한 열 기준
+                            result[i][j] += arr[k][m];      // M*M크기만금 result 배열의 원소 하나에 += 저장
+                        }
+                    }
                 }
             }
+
+            // result 배열의 최대 원소 구하기
+            int max = 0;
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result[i].length; j++) {
+                    if(max < result[i][j]){
+                        max = result[i][j];
+                    }
+                }
+            }
+            System.out.println(max);
         }
     }
 }
