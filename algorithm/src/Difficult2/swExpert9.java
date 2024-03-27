@@ -34,14 +34,40 @@ public class swExpert9 {
                 }
             }
 
-            int rowCount = 0;
+            int result = 0;
             for(int i = 0; i < N; i++){
                 int ckCount = 0;
                 for(int j = 0; j < N; j++){
-
+                    if(puzzle[i][j] == 0){
+                        if(ckCount == K){
+                            result += 1;
+                        }
+                        ckCount = 0;
+                    } else {
+                        ckCount += 1;
+                    }
+                }
+                if(ckCount == K){
+                    result += 1;
                 }
             }
-            System.out.println(rowCount);
+            for(int i = 0; i < N; i++){
+                int ckCount = 0;
+                for(int j = 0; j < N; j++){
+                    if(puzzle[j][i] == 0){
+                        if(ckCount == K){
+                            result += 1;
+                        }
+                        ckCount = 0;
+                    } else {
+                        ckCount += 1;
+                    }
+                }
+                if(ckCount == K){
+                    result += 1;
+                }
+            }
+            System.out.println("#" + (tc+1) + " " + result);
         }
     }
 }
